@@ -187,6 +187,8 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 
+			
+			
 					<form role="form">
 
 						<div class="form-group">
@@ -272,12 +274,12 @@
 
 							<span class="sp-thongbao" id="tbChucVu"></span>
 						</div>
-						<div class="form-group">
+				<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
 								</div>
-								<input type="text" name="gioLam" id="gioLam" class="form-control input-sm"
+								<input type="number" name="gioLam" id="gioLam" class="form-control input-sm"
 									placeholder="Giờ làm">
 							</div>
 							<span class="sp-thongbao" id="tbGiolam"></span>
@@ -288,7 +290,7 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
-					<button id="btnThemNV" type="button" class="btn btn-success">Thêm người dùng</button>
+					<button id="btnThemNV" type="button" class="btn btn-success" onclick="createStaff()">Thêm người dùng</button>
 					<button id="btnCapNhat" type="button" class="btn btn-success">Cập nhật</button>
 					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
@@ -324,6 +326,8 @@
 			});
 		});
 	</script>
+	<script src="./js/staff.js"></script>
+	<script src="./js/main.js"></script>
 </body>
 
 </html>
