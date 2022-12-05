@@ -126,7 +126,7 @@
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Loại nhân viên" id="searchName">
 									<div class="input-group-prepend">
-										<span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span>
+										<span class="input-group-text" id="btnTimNV" onclick="searchStaff()"><i class="fa fa-search"></i></span>
 									</div>
 								</div>
 							</div>
@@ -189,7 +189,7 @@
 
 			
 			
-					<form role="form" onsubmit="">
+					<form role="form" onsubmit="" id="form">
 
 						<div class="form-group">
 							<div class="input-group">
@@ -291,7 +291,7 @@
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
 					<button id="btnThemNV" type="button" class="btn btn-success" onclick="createStaff()">Thêm người dùng</button>
-					<button id="btnCapNhat" type="button" class="btn btn-success">Cập nhật</button>
+					<button id="btnCapNhat" type="button" class="btn btn-success" onclick = "updateStaff()">Cập nhật</button>
 					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 
