@@ -50,11 +50,16 @@ function renderStaff() {
                         <td>${staffList[i].totalSalary()}</td>
                         <td>${staffList[i].rating()}</td>
                         <td>
-                            <button onclick="deleteStaff('${staffList[i].account}')" 
+                            <button onclick="deleteStaff('${
+                              staffList[i].account
+                            }')" 
                                     class="btn btn-danger">Xoá
                             </button>
-                            <button onclick="getUpdateStaff('${staffList[i].account}')"  
-                                    class="btn btn-info">Cập nhật
+                            <button onclick="getUpdateStaff('${
+                              staffList[i].account
+                            }')"  
+                                    class="btn btn-info" id="update" data-toggle="modal"
+                                    data-target="#myModal">Cập nhật
                             </button>
 
                        </td>
@@ -106,9 +111,7 @@ function length(val, config) {
 
 function pattern(val, config) {
   if (config.regexp.test(val)) {
-    document.getElementById(
-      config.errorId
-    ).innerHTML = "";
+    document.getElementById(config.errorId).innerHTML = "";
     return true;
   }
   document.getElementById(config.errorId).innerHTML =
@@ -276,20 +279,12 @@ function deleteStaff(account) {
 //  cập nhật nhân viên
 // B1: chọn nhân viên muốn cập nhật & đẩy thông tin lên form
 
-function getUpdateStaff(account){
-  var index = findByAccount(account)
-  if(index === -1) return alert("Tài khoản không tồn tại ")
+function getUpdateStaff(account) {
+  var index = findByAccount(account);
+  if (index === -1) return alert("Tài khoản không tồn tại ");
 
-// hiện lại form
-  var formActive = document.getElementById("myModal")
-  formActive.classList = "modal fade show"
-  formActive.style.display = "block"
-
-  
-  
-
-// dom ngược lại thông tin nhân viên lên form
-  var staff = staffList[index]
+  // dom ngược lại thông tin nhân viên lên form
+  var staff = staffList[index];
   document.getElementById("tknv").value = staff.account;
   document.getElementById("name").value = staff.fullName;
   document.getElementById("email").value = staff.email;
@@ -298,11 +293,57 @@ function getUpdateStaff(account){
   document.getElementById("luongCB").value = staff.wage;
   document.getElementById("chucvu").value = staff.office;
   document.getElementById("gioLam").value = staff.workTime;
-  // disable input nhân viên
-  document.getElementById("tknv").disable = true
-
+  // disabled input nhân viên
+  document.getElementById("tknv").disabled = true;
 }
 
+// B2: Cho người dùng sủa lại form
+function updateStaff() {
+  // 1. dom input:
+  var account = document.getElementById("tknv").value;
+  var fullName = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var datepicker = document.getElementById("datepicker").value;
+  var wage = document.getElementById("luongCB").value;
+  var office = document.getElementById("chucvu").value;
+  var workTime = document.getElementById("gioLam").value;
+
+  if (!validateForm()) return;
+
+  index = findByAccount(account);
+  var staff = staffList[index];
+  
+  staff.fullName = fullName;
+  staff.email = email;
+  staff.password = password;
+  staff.datepicker = datepicker;
+  staff.wage = wage;
+  staff.office = office;
+  staff.workTime = workTime;
+
+  renderStaff();
+  saveStaffList();
+  cancelUpdate();
+}
+
+function cancelUpdate() {
+  document.getElementById("form").reset();
+  document.getElementById("tknv").disabled = false;
+}
+// tòm nhân viên
+
+function searchStaff (){
+  var keyWord = document.getElementById("searchName").value.toLowerCase().trim();
+  var result = [];
+  for (i = 0; i < StaffList.length; i++){
+      var Staff = StaffList[i].classify().toLowerCase();
+      if (Staff.includes(keyWord)){
+          result.push(StaffList[i]);
+      }
+  }
+  renderStaff(result);
+}
 // hàm tim account nhân viên
 function findByAccount(account) {
   for (i = 0; i < staffList.length; i++) {
@@ -312,4 +353,5 @@ function findByAccount(account) {
   }
   return -1;
 }
+
 
